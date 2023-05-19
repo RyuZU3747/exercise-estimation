@@ -14,7 +14,7 @@ parts = ["NOSE", "LEFT_EYE_INNER", "LEFT_EYE", "LEFT_EYE_OUTER", "RIGHT_EYE_INNE
          "LEFT_THUMB", "RIGHT_THUMB", "LEFT_HIP", "RIGHT_HIP", "LEFT_KNEE", "RIGHT_KNEE", "LEFT_ANKLE", "RIGHT_ANKLE",
          "LEFT_HEEL", "RIGHT_HEEL", "LEFT_FOOT_INDEX", "RIGHT_FOOT_INDEX"]
 
-cap = cv2.VideoCapture("test_video/squat2.mp4")
+cap = cv2.VideoCapture(0)
 fig = plt.figure(1)
 fig.canvas.draw()
 ax = fig.add_subplot(111, projection="3d")
@@ -51,7 +51,7 @@ with mp_pose.Pose(
             print(detect.vector_angle(results.pose_world_landmarks.landmark[23],results.pose_world_landmarks.landmark[11]))
             plotting.plot(plt, ax, results)
            
-        image = cv2.rectangle(image, (0,0),(500,500),(0,0,0),-1)
+        # image = cv2.rectangle(image, (0,0),(500,500),(0,0,0),-1)
             
         cv2.putText(image, "Current pose : "+current_pose, (10, 150),
                 cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255,255,255), 2, cv2.LINE_AA)    
