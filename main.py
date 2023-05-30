@@ -47,8 +47,7 @@ with mp_pose.Pose(
             delta = detect.delta.get(results)
             if delta:
                 current_pose = detect.detposes(results)
-            
-            print(detect.vector_angle(results.pose_world_landmarks.landmark[23],results.pose_world_landmarks.landmark[11]))
+                
             plotting.plot(plt, ax, results)
            
         # image = cv2.rectangle(image, (0,0),(500,500),(0,0,0),-1)

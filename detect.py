@@ -27,24 +27,23 @@ class pushup:
     frame = 0
     
     def islying(results):
-        if vector_angle(results.pose_world_landmarks.landmark[23], results.pose_world_landmarks.landmark[11]) < 70:
+        if vector_angle(results.pose_world_landmarks.landmark[23], results.pose_world_landmarks.landmark[11]) < 70 or vector_angle(results.pose_world_landmarks.landmark[23], results.pose_world_landmarks.landmark[11]) > 110:
             return True
-        elif vector_angle(results.pose_world_landmarks.landmark[24], results.pose_world_landmarks.landmark[12]) < 70:
+        elif vector_angle(results.pose_world_landmarks.landmark[24], results.pose_world_landmarks.landmark[12]) < 70 or vector_angle(results.pose_world_landmarks.landmark[24], results.pose_world_landmarks.landmark[12]) > 110:
             return True
         return False
     
     def check(results):
-        if vector_angle(results.pose_world_landmarks.landmark[11], results.pose_world_landmarks.landmark[23]) - vector_angle(results.pose_world_landmarks.landmark[23], results.pose_world_landmarks.landmark[27]) < 0.05:
+        if abs(vector_angle(results.pose_world_landmarks.landmark[11], results.pose_world_landmarks.landmark[23]) - vector_angle(results.pose_world_landmarks.landmark[23], results.pose_world_landmarks.landmark[27])) < 30:
             return True
-        elif vector_angle(results.pose_world_landmarks.landmark[12], results.pose_world_landmarks.landmark[24]) - vector_angle(results.pose_world_landmarks.landmark[24], results.pose_world_landmarks.landmark[28]) < 0.05:
+        elif abs(vector_angle(results.pose_world_landmarks.landmark[12], results.pose_world_landmarks.landmark[24]) - vector_angle(results.pose_world_landmarks.landmark[24], results.pose_world_landmarks.landmark[28])) < 30:
             return True
         return False
         
     def count(results):
-        # print(arm_ccw(results.pose_world_landmarks.landmark))
-        if arm_ccw(results.pose_world_landmarks.landmark) < 0.05:
+        if abs(arm_ccw(results.pose_world_landmarks.landmark)) < 0.05:
             pushup.flag = 1
-        if pushup.flag and arm_ccw(results.pose_world_landmarks.landmark) > 0.05:
+        if pushup.flag and abs(arm_ccw(results.pose_world_landmarks.landmark)) > 0.05:
             pushup.flag = 0
             pushup.cnt += 1
 
@@ -139,7 +138,7 @@ class delta:
                 retlist.append(delta.caldel(idx, landmark))
             avg = np.mean(retlist)
             delta.before = results
-            if avg < 0.05:
+            if avg < 0.03:
                 return True
             return False
 
